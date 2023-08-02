@@ -23,7 +23,7 @@ steps:
     command: 'restore'
     artifactoryService: 'Artifactory'
     targetResolveRepo: 'alpha-nuget-virtual'
-    solutionPath: 'Samples/CatalogReaderExample/*.sln'
+    solutionPath: 'CatalogReaderExample/*.sln'
     collectBuildInfo: true
     buildName: '$(DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
