@@ -13,7 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  DefinitionName: 'catalogreader-build'
+  DefinitionName: 'centralpackageanagement-build'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -25,5 +25,11 @@ steps:
     targetResolveRepo: 'alpha-nuget-virtual'
     solutionPath: 'CentralPackageManagementExample/*.sln'
     collectBuildInfo: true
+    buildName: '$(DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+
+- task: ArtifactoryPublishBuildInfo@1
+  inputs:
+    artifactoryService: 'Artifactory'
     buildName: '$(DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
