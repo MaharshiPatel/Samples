@@ -23,7 +23,7 @@ steps:
     command: 'restore'
     artifactoryService: 'Artifactory'
     targetResolveRepo: 'alpha-nuget-virtual'
-    solutionPath: 'ExtensionSDKasNuGetPackage/*.sln'
+    solutionPath: 'CentralPackageManagementExample/*.sln'
     collectBuildInfo: true
     buildName: '$(DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
