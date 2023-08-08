@@ -18,15 +18,27 @@ variables:
 steps:
 - task: NuGetToolInstaller@1
 
-- task: ArtifactoryNuGet@2
+- task: JFrogNuGet@1
   inputs:
     command: 'restore'
-    artifactoryService: 'Artifactory'
+    artifactoryConnection: 'Artifactory v2'
     targetResolveRepo: 'alpha-nuget-virtual'
     solutionPath: 'CentralPackageManagementExample/*.sln'
     collectBuildInfo: true
-    buildName: '$(DefinitionName)'
+    buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
+    nugetProtocolVersion: 'v2'
+
+
+# - task: ArtifactoryNuGet@2
+#   inputs:
+#     command: 'restore'
+#     artifactoryService: 'Artifactory'
+#     targetResolveRepo: 'alpha-nuget-virtual'
+#     solutionPath: 'CentralPackageManagementExample/*.sln'
+#     collectBuildInfo: true
+#     buildName: '$(DefinitionName)'
+#     buildNumber: '$(Build.BuildNumber)'
 
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
