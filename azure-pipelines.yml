@@ -45,10 +45,3 @@ steps:
     artifactoryService: 'Artifactory'
     buildName: '$(DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-
-- task: ArtifactoryXrayScan@1
-  inputs:
-    artifactoryService: 'Artifactory'
-    buildName: '$(DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: false
