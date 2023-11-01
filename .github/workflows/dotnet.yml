@@ -32,5 +32,6 @@ jobs:
       run: 
         pwd
         ls
+        cd CentralPackageManagementExample/
     - name: Restore dependencies
       run: jf nuget restore 
