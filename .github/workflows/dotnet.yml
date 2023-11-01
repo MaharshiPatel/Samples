@@ -11,6 +11,7 @@ jobs:
       JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
       SERVER_ID: "rtsaas"
       REPO: "alpha-nuget-virtual"
+      PROD_REPO: "alpha-nuget-prod-virtual"
     
     runs-on: ubuntu-latest
 
@@ -41,4 +42,7 @@ jobs:
         jf rt bp
     - name: Build Scan
       run: |
-        jf bs --fail=false cpm-nuget ${{ github.run_number }}
+        jf bs --fail=true cpm-nuget ${{ github.run_number }}
+    - name: Promotion
+      run: |
+        jf rt bpr cpm-nuget ${{ github.run_number }} $PROD_REPO --status='PROD Candidate' --comment='webservice is now QA candidate and hand over for regression test' --copy=true --props="maintainer=maharship;stage=prod"
