@@ -28,12 +28,6 @@ jobs:
       run: jf rt ping --server-id=$SERVER_ID
     - name: NugetConfig
       run: jf nugetc --server-id-resolve=$SERVER_ID --repo-resolve=$REPO
-    - name: location
-      run: 
-        pwd
-        ls
-        cd CentralPackageManagementExample/
-        pwd
-        ls
     - name: Restore dependencies
+      working-directory: ./CentralPackageManagementExample/
       run: jf nuget restore 
