@@ -26,6 +26,8 @@ jobs:
       run: jf c add $SERVER_ID --url=$JF_URL --access-token=$JF_ACCESS_TOKEN --interactive=false
     - name: Ping JFrog CLI
       run: jf rt ping --server-id=$SERVER_ID
+    - name: NugetConfig
+      run: jf nugetc --server-id-resolve=$SERVER_ID --repo-resolve=$REPO
     - name: location
       run: 
         pwd
