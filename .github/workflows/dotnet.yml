@@ -41,4 +41,4 @@ jobs:
         jf rt bp
     - name: Build Scan
       run: |
-        jf bs --fail=false --build-name=cpm-nuget --build-number=${{ github.run_number }}
+        jf bs --fail=false cpm-nuget ${{ github.run_number }}
