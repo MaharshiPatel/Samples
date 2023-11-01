@@ -31,3 +31,14 @@ jobs:
     - name: Restore dependencies
       working-directory: ./CentralPackageManagementExample/
       run: jf nuget restore 
+    - name: Collect Build Info
+      run: |
+        # Add env vars
+        jf rt bce
+        # Collect VCS details from git and add them to the build
+        jf rt bag
+        #Publish build-info
+        jf rt bp
+    - name: Build Scan
+      run: |
+        jf bs --fail=false
