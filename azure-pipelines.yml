@@ -18,9 +18,9 @@ steps:
     command: 'restore'
     artifactoryService: 'Artifactory'
     targetResolveRepo: 'alpha-nuget-virtual'
-    solutionPath: '**/*.sln'
+    solutionPath: 'CentralPackageManagementExample/*.sln'
     collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
+    buildName: '$(DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
 
 - task: ArtifactoryNuGet@2
