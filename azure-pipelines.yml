@@ -20,12 +20,10 @@ steps:
   displayName: 'Config CLI with Artifactory Repository'
   inputs:
     jfrogPlatformConnection: 'soleng-maharship'
-    command: 'jf dotnet-config --repo-resolve=alpha-nuget-virtual'
+    command: 
+      jf dotnet-config --repo-resolve=alpha-nuget-virtual
+      jf rt ping
+      jf dotnet restore --build-name=$(DefinitionName) --build-number=$(Build.BuildNumber)
 
-- task: JfrogCliV2@1
-  displayName: 'DotNet restore'
-  inputs:
-    jfrogPlatformConnection: 'soleng-maharship'
-    command: 'jf dotnet restore --build-name=$(DefinitionName) --build-number=$(Build.BuildNumber)'
 
 
