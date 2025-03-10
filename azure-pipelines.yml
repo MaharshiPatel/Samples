@@ -16,8 +16,6 @@ variables:
   DefinitionName: 'centralpackageanagement-build'
 
 steps:
-- task: NuGetToolInstaller@1
-
 - task: JfrogCliV2@1
   displayName: 'Config CLI with Artifactory Repository'
   inputs:
