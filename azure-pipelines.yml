@@ -40,10 +40,9 @@ steps:
     buildName: '$(DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
 
-- task: JFrogBuildScan@1
+- task: JfrogCliV2@1
   inputs:
-    xrayConnection: 'soleng-xray'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: false
-    vuln: true
+    jfrogPlatformConnection: 'soleng-maharship'
+    command: 'jf bs $(Build.DefinitionName) $(Build.BuildNumber)'
+
+
