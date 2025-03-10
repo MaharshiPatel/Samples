@@ -1,8 +1,3 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - main
 
@@ -16,13 +11,31 @@ variables:
   DefinitionName: 'centralpackageanagement-build'
 
 steps:
-- task: JfrogCliV2@1
-  displayName: 'Config CLI with Artifactory Repository'
+- task: NuGetToolInstaller@1
+
+- task: ArtifactoryNuGet@2
   inputs:
-    jfrogPlatformConnection: 'soleng-maharship'
-    command: 
-      jf dotnet-config --repo-resolve=alpha-nuget-virtual
-      jf rt ping
+    command: 'restore'
+    artifactoryService: 'Artifactory'
+    targetResolveRepo: 'alpha-nuget-virtual'
+    solutionPath: '**/*.sln'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
 
+- task: ArtifactoryNuGet@2
+  inputs:
+    command: 'push'
+    artifactoryService: 'Artifactory'
+    targetDeployRepo: 'alpha-nuget-virtual'
+    pathToNupkg: '*.nupkg'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true
 
-
+- task: ArtifactoryPublishBuildInfo@1
+  inputs:
+    artifactoryService: 'Artifactory'
+    buildName: '$(DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
