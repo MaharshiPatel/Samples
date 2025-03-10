@@ -1,19 +1,33 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  DefinitionName: 'centralpackageanagement-build'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: NuGetToolInstaller@1
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: JfrogCliV2@1
+  displayName: 'Config CLI with Artifactory Repository'
+  inputs:
+    jfrogPlatformConnection: 'soleng-maharship'
+    command: 'jf dotnet-config --repo-resolve=alpha-nuget-virtual'
+
+- task: JfrogCliV2@1
+  displayName: 'DotNet restore'
+  inputs:
+    jfrogPlatformConnection: 'soleng-maharship'
+    command: 'jf dotnet restore --build-name=$(DefinitionName) --build-number=$(Build.BuildNumber)'
+
+
