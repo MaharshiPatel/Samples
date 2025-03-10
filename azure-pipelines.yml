@@ -23,7 +23,6 @@ steps:
     command: 
       jf dotnet-config --repo-resolve=alpha-nuget-virtual
       jf rt ping
-      jf dotnet restore --build-name=$(DefinitionName) --build-number=$(Build.BuildNumber)
 
 
 
